@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+
+<!-- Header -->
+<div class="mdl-layout mdl-js-layout mdl-layou--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout__title">Arabic</span>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <main class="mdl-layout__content">
+    <div class="mdl-grid">
+
+      <!-- Input Card -->
+      <div class="mdl-card mdl-shadow--4dp">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Verb Conjugator</h2>
+        </div>
+
+        <!-- Text Form -->
+        <div class="mdl-card__actions">
+          <form action="{% url 'table' %}" method="post">
+          {% csrf_token %}
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" name="verb" value="درس">
+              <label class="mdl-textfield__label">3 letter root...</label>
+            </div>
+
+            <!-- Submit Button -->
+            <input class="mdl-button" type="submit" value="Conjugate">
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+</div>

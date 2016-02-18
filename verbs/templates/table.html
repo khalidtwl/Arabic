@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+
+<!-- Header -->
+<div class="mdl-layout mdl-js-layout mdl-layou--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout__title">Arabic</span>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <main class="mdl-layout__content">
+    <div class="mdl-grid">
+
+      {% if root %}
+      {{past}}
+      {% endif %}
+
+      <!-- Home Button -->
+      <div>
+        <a href="{% url 'index' %}">Home</a>
+      </div>
+
+    </div>
+  </main>
+
+</div>
