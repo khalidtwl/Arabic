@@ -1,69 +1,21 @@
-# Sample roots for debugging: درس باع
-# Abstract away the char sizes of Arabic characters
-import sys
-
-# Printing to a file
-# orig_stdout = sys.stdout
-# f = file('out.txt', 'w')
-# sys.stdout = f
+import re
 
 char_size = len('ي')
 
-def past_tense(root):
-    f = root[0]
-    a = root[1]
-    l = root[2]
-    lst = []
-    lst.append(f + 'َ' + a + 'َ' + l + 'َ')
-    lst.append(f + 'َ' + a + 'َّ' + l + 'َ')
-    lst.append(f + 'َ' + 'ا' + a + 'َ' + l + 'َ')
-    lst.append('أ' + f + 'ْ' + a + 'َ' + l + 'َ')
-    lst.append('تَ' + f + 'َ' + a + 'َّ' + l + 'َ')
-    lst.append('تَ' + f + 'َ' + 'ا' + a + 'َ' + l + 'َ')
-    lst.append('اِنْ' + f + 'َ' + a + 'َ' + l + 'َ')
-    lst.append('اِ' + f + 'ْ' + 'تَ' + a + 'َ' + l + 'َ')
-    lst.append('اِ' + f + 'ْ' + a + 'َ' + l + 'َّ')
-    lst.append('اِسْتَ' + f + 'ْ' + a + 'َ' + l + 'َ')
-    return lst
+# Arabic Unicode Block
+form1 = re.compile('([\u0600-\u06FF]\u064E){3}')
+form2 = re.compile('[\u0600-\u06FF]\u064E?[\u0600-\u06FF]\u0651[\u0600-\u06FF]\u064E?')
+form3 = re.compile('[\u0600-\u06FF]\u064E?\u0627([\u0600-\u06FF]\u064E?){1}([\u0600-\u06FF]\u064E?){1}')
 
-def present_tense(root):
-    f = root[0]
-    if f == 'و':
-        f == ''
-    a = root[1]
-    if a == 'ا':
-        a = 'ي'
-    l = root[2]
-    lst = []
-    lst.append('يَ'+f+'ْ'+a+'َُِ'+l+'ُ')
-    lst.append('يُ'+f+'َ'+a+'ِّ'+l+'ُ')
-    lst.append('يُ'+f+'َ'+'ا'+a+'ِ'+l+'ُ')
-    lst.append('يُ'+f+'ْ'+a+'ِ'+l+'ُ')
-    lst.append('يَتَ'+f+'َ'+a+'َّ'+l+'ُ')
-    lst.append('يَتَ'+f+'َ'+'ا'+a+'َ'+l+'ُ')
-    lst.append('يَنْ'+f+'َ'+a+'ِ'+l+'ُ')
-    lst.append('يَ'+f+'ْ'+'تَ'+a+'ِ'+l+'ُ')
-    lst.append('يَ'+f+'ْ'+a+'َ'+l+'ُّ')
-    lst.append('يَسْتَ'+f+'ْ'+a+'ِ'+l+'ُ')
-    return lst
+word = input("Enter an Arabic verb: ")
 
-def verb_chart(root):
-    print('%12s %12s \n' % ('ماضي', 'مضارع'))
-    for i in range(10):
-        print('%12s   %12s' % (past_tense(root, i+1), present_tense(root, i+1)))
+# Confirmation message
+if form1.match(word):
+    print("Form 1 verb")
 
-# Checks if root is 3 letters long
-# while not len(root) == 3:
-#     root = input("That was " + str(len(root)) + " character(s) long. Please type in a 3-letter root:")
+# Testing Diacritic
+if form2.match(word):
+    print("Form 2 verb")
 
-# Stores conjugations as lists
-# past = past_tense(root)
-# present = present_tense(root)
-
-# Pretty prints
-# for i in range(10):
-#     print(past[i], present[i])
-
-# Reverting to shell
-# sys.stdout = orig_stdout
-# f.close()
+if form3.match(word):
+    print("Form 3 verb")
